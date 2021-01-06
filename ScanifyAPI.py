@@ -21,7 +21,9 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 mysql.init_app(app)
 
-
+@app.route('/')
+def hello():
+    return "Hello world"
 
 @app.route('/addProduct',methods=['POST'])
 def add_producttocart():
