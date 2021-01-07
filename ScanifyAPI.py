@@ -43,7 +43,7 @@ def add_producttocart():
   
         
         if(_Username and _Productname and _Quantity and _price and _purchased  and request.method=='POST'):
-            sqlQuery="INSERT INTO pythonlogin.AddtoCart_table(Username, Productname,Quantity,price,purchased) VALUES(%s,%s,%s,%s,%s)"
+            sqlQuery="INSERT INTO heroku_5ef5065bba5a68a.AddtoCart_table(Username, Productname,Quantity,price,purchased) VALUES(%s,%s,%s,%s,%s)"
             bindData= (_Username,_Productname,_Quantity,_price,_purchased)
             conn=mysql.connect()
             cursor= conn.cursor()
@@ -68,7 +68,7 @@ def add_producttocart():
 @app.route('/Product')
 def getproducts():
     cur = mysql.connect().cursor()
-    cur.execute('''select * from pythonlogin.barcode_product''')
+    cur.execute('''select * from heroku_5ef5065bba5a68a.barcode_product''')
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})
@@ -76,7 +76,7 @@ def getproducts():
 @app.route('/Product/<int:id>')
 def getproduct(id):
     cur = mysql.connect().cursor()
-    cur.execute("select * from pythonlogin.barcode_product where barcode=%s",id)
+    cur.execute("select * from heroku_5ef5065bba5a68a.barcode_product where barcode=%s",id)
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     #print(r["email"])
@@ -85,7 +85,7 @@ def getproduct(id):
 @app.route('/getCartItems')
 def getCartitems():
     cur = mysql.connect().cursor()
-    cur.execute('''select * from pythonlogin.addtocart_table where purchased=1''')
+    cur.execute('''select * from heroku_5ef5065bba5a68a.addtocart_table where purchased=1''')
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})  
@@ -93,7 +93,7 @@ def getCartitems():
 @app.route('/getRatingItems')
 def getRatingitems():
     cur = mysql.connect().cursor()
-    cur.execute('''select * from pythonlogin.Invoice_table ''')
+    cur.execute('''select * from heroku_5ef5065bba5a68a.Invoice_table ''')
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})  
@@ -109,7 +109,7 @@ def update_Qty():
         _Quantity=_json['Quantity']
       
         if(_row_id and _Quantity and request.method=='PUT'):
-            sqlQuery="UPDATE pythonlogin.addtocart_table SET Quantity=%s WHERE row_id=%s"
+            sqlQuery="UPDATE heroku_5ef5065bba5a68a.addtocart_table SET Quantity=%s WHERE row_id=%s"
             bindData= (_Quantity , _row_id)
             conn=mysql.connect()
             cursor= conn.cursor()
@@ -135,7 +135,7 @@ def update_Purchased():
         _purchased=_json['purchased']
       
         if(_row_id and _purchased and request.method=='PUT'):
-            sqlQuery="UPDATE pythonlogin.addtocart_table SET purchased=%s WHERE row_id=%s"
+            sqlQuery="UPDATE heroku_5ef5065bba5a68a.addtocart_table SET purchased=%s WHERE row_id=%s"
             bindData= (_purchased , _row_id)
             conn=mysql.connect()
             cursor= conn.cursor()
@@ -159,7 +159,7 @@ def delete_emp(id):
 	try:
 		conn = mysql.connect()
 		cursor = conn.cursor()
-		cursor.execute("DELETE FROM pythonlogin.accounts WHERE id =%s", (id,))
+		cursor.execute("DELETE FROM heroku_5ef5065bba5a68a.accounts WHERE id =%s", (id,))
 		conn.commit()
 		respone = jsonify('Employee deleted successfully!')
 		respone.status_code = 200
