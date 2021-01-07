@@ -14,10 +14,10 @@ app = Flask(__name__)
 mysql = MySQL()
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Klusener@123'
-app.config['MYSQL_DATABASE_DB'] = 'pythonlogin'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'b43ceb664738e7'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'b5b7ebdc'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_5ef5065bba5a68a'
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-east-02.cleardb.com'
 
 mysql.init_app(app)
 
