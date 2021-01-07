@@ -12,12 +12,17 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 mysql = MySQL()
-
+os.environ.get('MYSQL_DATABASE_USER')
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'b43ceb664738e7'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'b5b7ebdc'
-app.config['MYSQL_DATABASE_DB'] = 'heroku_5ef5065bba5a68a'
-app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-east-02.cleardb.com'
+#app.config['MYSQL_DATABASE_USER'] = 'b43ceb664738e7'
+#app.config['MYSQL_DATABASE_PASSWORD'] = 'b5b7ebdc'
+#app.config['MYSQL_DATABASE_DB'] = 'heroku_5ef5065bba5a68a'
+#app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-east-02.cleardb.com'
+
+app.config['MYSQL_DATABASE_USER'] = os.environ.get('MYSQL_DATABASE_USER')
+app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('MYSQL_DATABASE_PASSWORD')
+app.config['MYSQL_DATABASE_DB'] = os.environ.get('MYSQL_DATABASE_DB')
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get('MYSQL_DATABASE_HOST')
 
 mysql.init_app(app)
 
@@ -63,7 +68,7 @@ def add_producttocart():
 @app.route('/Product')
 def getproducts():
     cur = mysql.connect().cursor()
-    cur.execute('''select * from pythonlogin.AddtoCart_table''')
+    cur.execute('''select * from pythonlogin.barcode_product''')
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})
