@@ -63,7 +63,7 @@ def add_producttocart():
 @app.route('/Product')
 def getproducts():
     cur = mysql.connect().cursor()
-    cur.execute('''select * from pythonlogin.barcode_product''')
+    cur.execute('''select * from pythonlogin.AddtoCart_table''')
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})
