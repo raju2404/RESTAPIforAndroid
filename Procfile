@@ -1,1 +1,1 @@
-web: gunicorn ScanifyAPI:app
+web: gunicorn --workers=1 ScanifyAPI:app

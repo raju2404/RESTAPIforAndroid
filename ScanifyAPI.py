@@ -12,7 +12,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 mysql = MySQL()
-os.environ.get('MYSQL_DATABASE_USER')
+
 # MySQL configurations
 #app.config['MYSQL_DATABASE_USER'] = 'b43ceb664738e7'
 #app.config['MYSQL_DATABASE_PASSWORD'] = 'b5b7ebdc'
@@ -42,7 +42,7 @@ def add_producttocart():
         _purchased=_json['purchased']
   
         
-        if(_Username and _Productname and _Quantity and _price and _purchased  ):
+        if(_Username and _Productname and _Quantity and _price and _purchased  and request.method=='POST'):
             sqlQuery="INSERT INTO heroku_5ef5065bba5a68a.AddtoCart_table (Username, Productname,Quantity,price,purchased) VALUES(%s,%s,%s,%s,%s)"
             bindData= (_Username,_Productname,_Quantity,_price,_purchased)
             conn=mysql.connect()
