@@ -14,15 +14,15 @@ app = Flask(__name__)
 mysql = MySQL()
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'b43ceb664738e7'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'b5b7ebdc'
-app.config['MYSQL_DATABASE_DB'] = 'heroku_5ef5065bba5a68a'
-app.config['MYSQL_DATABASE_HOST'] = '192.168.0.41:3306'
+#app.config['MYSQL_DATABASE_USER'] = 'b43ceb664738e7'
+#app.config['MYSQL_DATABASE_PASSWORD'] = 'b5b7ebdc'
+#app.config['MYSQL_DATABASE_DB'] = 'heroku_5ef5065bba5a68a'
+#app.config['MYSQL_DATABASE_HOST'] = '192.168.0.41:3306'
 
-#app.config['MYSQL_DATABASE_USER'] = os.environ.get('MYSQL_DATABASE_USER')
-#app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('MYSQL_DATABASE_PASSWORD')
-#app.config['MYSQL_DATABASE_DB'] = os.environ.get('MYSQL_DATABASE_DB')
-#app.config['MYSQL_DATABASE_HOST'] = os.environ.get('MYSQL_DATABASE_HOST')
+app.config['MYSQL_DATABASE_USER'] = os.environ.get('MYSQL_DATABASE_USER')
+app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('MYSQL_DATABASE_PASSWORD')
+app.config['MYSQL_DATABASE_DB'] = os.environ.get('MYSQL_DATABASE_DB')
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get('MYSQL_DATABASE_HOST')
 
 mysql.init_app(app)
 
