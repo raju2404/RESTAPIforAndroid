@@ -34,7 +34,7 @@ def hello():
 def add_producttocart():
     try:
         
-        _json=request.get_json()
+        _json=request.get_json(force=True)
         _Username=_json['Username']
         _Productname = _json['Productname']
         _Quantity= _json['Quantity']
