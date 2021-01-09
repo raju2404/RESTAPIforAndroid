@@ -34,7 +34,7 @@ def hello():
 def add_producttocart():
     try:
         
-        _json=request.json(force=True)
+        _json=request.get_json(force=True)
         _Username=_json['Username']
         _Productname = _json['Productname']
         _Quantity= _json['Quantity']
@@ -105,7 +105,7 @@ def getRatingitems():
 def update_Qty():
     try:
         
-        _json=request.json
+        _json=request.get_json(force=True)
         _row_id = _json['row_id']
         _Quantity=_json['Quantity']
       
@@ -131,7 +131,7 @@ def update_Qty():
 def update_Purchased():
     try:
         
-        _json=request.json
+        _json=request.get_json(force=True)
         _row_id = _json['row_id']
         _purchased=_json['purchased']
       
