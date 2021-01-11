@@ -91,6 +91,15 @@ def getCartitems():
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})  
 
+@app.route('/getCartItems/<string:Username>')
+def getUserCartitems(Username):
+    cur = mysql.connect().cursor()
+    cur.execute("select * from heroku_5ef5065bba5a68a.addtocart_table where purchased=1 and Username=%s",Username)
+    r = [dict((cur.description[i][0], value)
+                for i, value in enumerate(row)) for row in cur.fetchall()]
+    return jsonify({'myCollection' : r}) 
+
+
 @app.route('/getRatingItems')
 def getRatingitems():
     cur = mysql.connect().cursor()
