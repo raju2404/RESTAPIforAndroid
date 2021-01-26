@@ -162,7 +162,31 @@ def update_Purchased():
         cursor.close()
         conn.close()
 
-
+@app.route('/updatePaid',methods=['PUT'])
+def update_Paid():
+    try:
+        
+        _json=request.get_json(force=True)
+        _Username = _json['Username']
+        _paid=_json['paid']
+      
+        if(_Username  and request.method=='PUT'):
+            sqlQuery="UPDATE pythonlogin.addtocart_table SET paid=%s,InvoiceNumber = EXTRACT(DAY_SECOND FROM NOW()) WHERE Username=%s and purchased=1"
+            bindData= (_paid , _Username)
+            conn=mysql.connect()
+            cursor= conn.cursor()
+            cursor.execute(sqlQuery,bindData)
+            conn.commit()
+            response = jsonify("Items purchased successfully")
+            response.status_code = 200
+            return response
+        else:
+            return "Not PUT request"
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.route('/delete/<int:id>', methods=['DELETE'])
 def delete_emp(id):
