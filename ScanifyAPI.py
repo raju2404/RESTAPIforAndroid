@@ -171,7 +171,7 @@ def update_Paid():
         _paid=_json['paid']
       
         if(_Username  and request.method=='PUT'):
-            sqlQuery="UPDATE pythonlogin.addtocart_table SET paid=%s,InvoiceNumber = EXTRACT(DAY_SECOND FROM NOW()) WHERE Username=%s and purchased=1"
+            sqlQuery="UPDATE heroku_5ef5065bba5a68a.addtocart_table SET paid=%s,InvoiceNumber = EXTRACT(DAY_SECOND FROM NOW()) WHERE Username=%s and purchased=1"
             bindData= (_paid , _Username)
             conn=mysql.connect()
             cursor= conn.cursor()
