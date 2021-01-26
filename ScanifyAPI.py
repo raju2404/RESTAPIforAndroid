@@ -100,10 +100,10 @@ def getUserCartitems(Username):
     return jsonify({'myCollection' : r}) 
 
 
-@app.route('/getRatingItems')
-def getRatingitems():
+@app.route('/getRatingItems/<string:Username>')
+def getRatingitems(Username):
     cur = mysql.connect().cursor()
-    cur.execute('''select * from heroku_5ef5065bba5a68a.addtocart_table ''')
+    cur.execute("select * from heroku_5ef5065bba5a68a.addtocart_table where paid=1  and Username=%s",Username)
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'myCollection' : r})  
